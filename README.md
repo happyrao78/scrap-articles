@@ -1,5 +1,3 @@
----
-````markdown
 # 📰 Scrap Articles
 
 A Python-based web scraping tool designed to **extract**, **summarize**, and **store** articles from various websites. Scrap Articles provides both **CLI** and **RESTful API** interfaces, supporting flexible usage across different environments.
