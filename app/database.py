@@ -28,6 +28,7 @@ def get_db():
     """Dependency to get database session."""
     db = SessionLocal()
     try:
+        db.expire_on_commit = True
         yield db
     finally:
         db.close()
