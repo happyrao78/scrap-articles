@@ -38,17 +38,17 @@ def scrape(url: str, limit: int, verbose: bool):
         init_db()
         db = SessionLocal()
         
-        click.echo(f"🔍 Scraping articles from: {url}")
-        click.echo(f"📊 Limit: {limit} articles")
+        click.echo(f"Scraping articles from: {url}")
+        click.echo(f"Limit: {limit} articles")
         
         # Scrape articles
         scraped_articles = scrape_articles(url, limit)
         
         if not scraped_articles:
-            click.echo("❌ No articles found at the provided URL")
+            click.echo("No articles found at the provided URL")
             return
         
-        click.echo(f"✅ Found {len(scraped_articles)} articles")
+        click.echo(f"Found {len(scraped_articles)} articles")
         
         # Get Gemini client
         gemini_client = get_gemini_client()
@@ -86,17 +86,17 @@ def scrape(url: str, limit: int, verbose: bool):
                     processed_count += 1
                     
                     if verbose:
-                        click.echo(f"\n📄 Processed: {article.title}")
-                        click.echo(f"📝 Summary: {final_summary[:100]}...")
+                        click.echo(f"\n Processed: {article.title}")
+                        click.echo(f" Summary: {final_summary[:100]}...")
                         
                 except Exception as e:
                     logger.error(f"Error processing article: {str(e)}")
                     continue
         
-        click.echo(f"\n🎉 Successfully processed {processed_count} articles!")
+        click.echo(f"\n Successfully processed {processed_count} articles!")
         
     except Exception as e:
-        click.echo(f"❌ Error: {str(e)}")
+        click.echo(f" Error: {str(e)}")
     finally:
         db.close()
 
@@ -112,20 +112,20 @@ def get_summary(id: int):
         article = db.query(Article).filter(Article.id == id).first()
         
         if not article:
-            click.echo(f"❌ Article with ID {id} not found")
+            click.echo(f" Article with ID {id} not found")
             return
         
-        click.echo(f"\n📄 Title: {article.title}")
-        click.echo(f"✍️  Author: {article.author}")
-        click.echo(f"🔗 Source: {article.source_url}")
-        click.echo(f"📅 Created: {article.created_at}")
-        click.echo(f"\n📝 Summary:")
+        click.echo(f"\n Title: {article.title}")
+        click.echo(f"  Author: {article.author}")
+        click.echo(f" Source: {article.source_url}")
+        click.echo(f" Created: {article.created_at}")
+        click.echo(f"\n Summary:")
         click.echo(f"{article.summary}")
-        click.echo(f"\n📄 Original Content (first 200 chars):")
+        click.echo(f"\n Original Content (first 200 chars):")
         click.echo(f"{article.content[:200]}...")
         
     except Exception as e:
-        click.echo(f"❌ Error: {str(e)}")
+        click.echo(f" Error: {str(e)}")
     finally:
         db.close()
 
@@ -141,22 +141,22 @@ def list_articles(limit: int):
         articles = db.query(Article).limit(limit).all()
         
         if not articles:
-            click.echo("📭 No articles found in database")
+            click.echo(" No articles found in database")
             return
         
-        click.echo(f"\n📚 Found {len(articles)} articles:")
+        click.echo(f"\n Found {len(articles)} articles:")
         click.echo("-" * 80)
         
         for article in articles:
-            click.echo(f"🆔 ID: {article.id}")
-            click.echo(f"📄 Title: {article.title}")
-            click.echo(f"✍️  Author: {article.author}")
-            click.echo(f"📅 Created: {article.created_at}")
-            click.echo(f"📝 Summary: {article.summary[:100]}...")
+            click.echo(f" ID: {article.id}")
+            click.echo(f" Title: {article.title}")
+            click.echo(f"  Author: {article.author}")
+            click.echo(f" Created: {article.created_at}")
+            click.echo(f" Summary: {article.summary[:100]}...")
             click.echo("-" * 80)
         
     except Exception as e:
-        click.echo(f"❌ Error: {str(e)}")
+        click.echo(f" Error: {str(e)}")
     finally:
         db.close()
 
@@ -173,17 +173,17 @@ def delete_article(id: int):
         article = db.query(Article).filter(Article.id == id).first()
         
         if not article:
-            click.echo(f"❌ Article with ID {id} not found")
+            click.echo(f" Article with ID {id} not found")
             return
         
         title = article.title
         db.delete(article)
         db.commit()
         
-        click.echo(f"✅ Deleted article: {title}")
+        click.echo(f" Deleted article: {title}")
         
     except Exception as e:
-        click.echo(f"❌ Error: {str(e)}")
+        click.echo(f" Error: {str(e)}")
     finally:
         db.close()
 
@@ -192,9 +192,9 @@ def init_database():
     """Initialize the database and create tables."""
     try:
         init_db()
-        click.echo("✅ Database initialized successfully!")
+        click.echo(" Database initialized successfully!")
     except Exception as e:
-        click.echo(f"❌ Error initializing database: {str(e)}")
+        click.echo(f" Error initializing database: {str(e)}")
 
 @cli.command()
 def test_gemini():
@@ -204,11 +204,11 @@ def test_gemini():
         test_text = "This is a test text to check if Gemini API is working properly."
         summary = gemini_client.summarize_text(test_text)
         
-        click.echo("✅ Gemini API connection successful!")
-        click.echo(f"🤖 Test summary: {summary}")
+        click.echo(" Gemini API connection successful!")
+        click.echo(f" Test summary: {summary}")
         
     except Exception as e:
-        click.echo(f"❌ Gemini API error: {str(e)}")
+        click.echo(f" Gemini API error: {str(e)}")
 
 @cli.command()
 @click.option('--ids', '-i', multiple=True, type=int, help="IDs of articles to delete")
@@ -221,24 +221,24 @@ def delete_articles(ids):
         db = SessionLocal()
 
         if not ids:
-            click.echo("❌ No IDs provided. Use --ids to specify article IDs.")
+            click.echo(" No IDs provided. Use --ids to specify article IDs.")
             return
 
         articles = db.query(Article).filter(Article.id.in_(ids)).all()
 
         if not articles:
-            click.echo(f"❌ No articles found for the provided IDs: {ids}")
+            click.echo(f" No articles found for the provided IDs: {ids}")
             return
 
         for article in articles:
             db.delete(article)
-            click.echo(f"✅ Deleted article: {article.title} (ID: {article.id})")
+            click.echo(f" Deleted article: {article.title} (ID: {article.id})")
 
         db.commit()
-        click.echo("🎉 All specified articles have been deleted successfully!")
+        click.echo(" All specified articles have been deleted successfully!")
 
     except Exception as e:
-        click.echo(f"❌ Error: {str(e)}")
+        click.echo(f" Error: {str(e)}")
     finally:
         db.close()
 if __name__ == '__main__':

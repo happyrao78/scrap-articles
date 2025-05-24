@@ -80,7 +80,7 @@ GEMINI_API_KEY=your_google_gemini_api_key
 | `list-articles`   | List all stored articles         | `python cli.py list-articles --limit 10`                             |
 | `get-summary`     | Get the summary of an article    | `python cli.py get-summary --id 1`                                   |
 | `delete-article`  | Delete a single article          | `python cli.py delete-article --id 1`                                |
-| `delete-articles` | Delete multiple articles         | `python cli.py delete-articles --ids 1 2 3`                          |
+| `delete-articles` | Delete multiple articles         | `python cli.py delete-articles --ids 1 --ids 2  --ids 3`                          |
 | `test-gemini`     | Test Gemini API integration      | `python cli.py test-gemini`                                          |
 
 ### 2. API Endpoints
