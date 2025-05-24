@@ -1,10 +1,7 @@
-"""Command Line Interface for the scraper application."""
-
 import click
 import logging
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
-
 from app.database import SessionLocal, init_db, delete_articles_by_ids
 from app.scrapping.scraper import scrape_articles
 from app.processing.preprocessor import preprocess_text
@@ -21,13 +18,13 @@ logger = logging.getLogger(__name__)
 
 @click.group()
 def cli():
-    """Full-Stack Scraper CLI - Web scraping and summarization tool."""
     pass
 
 @cli.command()
 @click.option('--url', '-u', required=True, help='URL to scrape articles from')
 @click.option('--limit', '-l', default=5, help='Maximum number of articles to scrape')
 @click.option('--verbose', '-v', is_flag=True, help='Enable verbose output')
+
 def scrape(url: str, limit: int, verbose: bool):
     """Scrape articles from a URL and store them with summaries."""
     if verbose:
@@ -102,6 +99,7 @@ def scrape(url: str, limit: int, verbose: bool):
 
 @cli.command()
 @click.option('--id', '-i', required=True, type=int, help='Article ID to retrieve')
+
 def get_summary(id: int):
     """Get article summary by ID."""
     try:
@@ -130,6 +128,7 @@ def get_summary(id: int):
         db.close()
 
 @cli.command()
+
 @click.option('--limit', '-l', default=10, help='Maximum number of articles to list')
 def list_articles(limit: int):
     """List all stored articles."""
@@ -161,6 +160,7 @@ def list_articles(limit: int):
         db.close()
 
 @cli.command()
+
 @click.option('--id', '-i', required=True, type=int, help='Article ID to delete')
 @click.confirmation_option(prompt='Are you sure you want to delete this article?')
 def delete_article(id: int):
@@ -188,6 +188,7 @@ def delete_article(id: int):
         db.close()
 
 @cli.command()
+
 def init_database():
     """Initialize the database and create tables."""
     try:

@@ -1,5 +1,3 @@
-"""API routes for the FastAPI application."""
-
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any

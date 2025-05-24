@@ -1,5 +1,3 @@
-"""Database configuration and session management."""
-
 import os
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.ext.declarative import declarative_base
@@ -21,8 +19,6 @@ engine = create_engine(
 
 # Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
 
 def get_db():
     """Dependency to get database session."""

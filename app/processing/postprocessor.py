@@ -1,5 +1,3 @@
-"""Post-processing functionality for summaries."""
-
 import re
 import logging
 from typing import List

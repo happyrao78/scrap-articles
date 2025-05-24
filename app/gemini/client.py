@@ -1,5 +1,3 @@
-"""Gemini API client for text summarization."""
-
 import os
 import google.generativeai as genai
 import logging

@@ -1,12 +1,9 @@
-"""FastAPI application main entry point."""
-
 import os
 import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
-
 from app.database import init_db
 from app.api.routes import router
 

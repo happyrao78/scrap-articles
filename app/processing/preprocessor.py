@@ -1,5 +1,3 @@
-"""Text preprocessing functionality."""
-
 import re
 from typing import Set
 import logging
