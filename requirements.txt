@@ -11,3 +11,6 @@ python-multipart==0.0.6
 lxml==4.9.3
 aiohttp==3.9.1
 asyncio
+black
+flake8
+

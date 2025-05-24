@@ -36,6 +36,10 @@ MANIFEST
 articles.db
 data/
 
+# Javascript 
+*node_modules
+*package-lock.json
+
 # Virtual environments
 venv/
 env/
@@ -85,3 +89,4 @@ dmypy.json
 # Temporary files
 *.tmp
 *.temp
+task.pdf
